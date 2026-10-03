@@ -1,4 +1,4 @@
-name: Loyo Doc Scribe
+﻿name: Loyo Doc Scribe
 on:
   schedule:
     - cron: '*/15 * * * *'
