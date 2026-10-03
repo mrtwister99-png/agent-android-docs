@@ -6,7 +6,6 @@ GH_TOKEN = os.environ["GH_TOKEN"]
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 REPO_NAME = os.environ.get("REPO_NAME", "mrtwister99-png/android-app-main")
 AGENT_LABEL = os.environ.get("AGENT_LABEL", "android-docs")
-
 print(f"START {AGENT_LABEL} on {REPO_NAME}")
 
 genai.configure(api_key=GEMINI_API_KEY)
@@ -35,7 +34,7 @@ ISSUE #{issue.number}: {issue.title}
 BODY: {issue.body}
 ROLE: {AGENT_LABEL}
 Files: {chr(10).join(structure[:30])}
-Output FILE: app/src/main/java/com/example/newapp/... with ```kotlin code```
+Output FILE: app/src/main/java/com/example/newapp/... with kotlin code
 Max 3 files.
 """
 
@@ -43,7 +42,7 @@ resp = model.generate_content(prompt)
 text = resp.text
 print(text[:3000])
 
-pattern = re.compile(r'FILE:\s*(.+?)\n```(?:kotlin)?\n(.*?)\n```', re.DOTALL)
+pattern = re.compile(r'FILE:\s*(.+?)\n`(?:kotlin)?\n(.*?)\n`', re.DOTALL)
 matches = pattern.findall(text)
 if not matches:
     print("No files")
